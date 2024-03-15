@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tedy Web</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Animasi */
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        .btn {
+            animation: bounce 1s infinite; /* Memanggil animasi bounce */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h1>Welcome to My Web</h1>
+        <p>Discover amazing experiences around the world.</p>
+        <button class="btn" onclick="startAdventure()">Get Started</button>
+        <div id="clock" class="clock"></div>
+        <img src="Tedy.jpg" alt="Small Image" class="small-image">
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Selamat datang di REKINSA! Kami adalah tim yang berdedikasi untuk menyediakan solusi terbaik dalam bidang Desain PCB, Desain 3D, dan pengembangan aplikasi LabVIEW. Dengan pengalaman yang luas dan kompetensi teknis yang mendalam, kami siap membantu Anda mewujudkan proyek-proyek teknologi yang inovatif dan berkualitas tinggi. Dari konseptualisasi hingga implementasi, kami akan bekerja sama dengan Anda untuk memastikan setiap detail terwujud dengan sempurna. Percayakan kepada kami untuk memberikan solusi yang tepat, efisien, dan terpercaya untuk kebutuhan desain dan pengembangan teknologi Anda.</p>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>Desain PCB</li>
+            <li>Desain 3D</li>
+            <li>LabView</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Jika Anda tertarik dengan layanan kami atau memiliki pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami. Isilah formulir di bawah ini atau gunakan informasi kontak yang tertera untuk menghubungi kami langsung.</p>
+        <form onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <small id="emailError" style="color: red;"></small>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Beautiful Landing Page. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        function startAdventure() {
+            // Tampilkan pesan pop-up
+            alert("Adventure is begin right now");
+
+            // Masuk mode layar penuh
+            var docElm = document.documentElement;
+            if (docElm.requestFullscreen) {
+                docElm.requestFullscreen();
+            } else if (docElm.mozRequestFullScreen) { /* Firefox */
+                docElm.mozRequestFullScreen();
+            } else if (docElm.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                docElm.webkitRequestFullscreen();
+            } else if (docElm.msRequestFullscreen) { /* IE/Edge */
+                docElm.msRequestFullscreen();
+            }
+
+            // Sembunyikan tombol "Get Started"
+            var button = document.querySelector('.btn');
+            button.style.display = 'none';
+
+            // Tampilkan jam
+            var clock = document.getElementById('clock');
+            clock.style.display = 'block';
+
+            // Perbarui waktu setiap detik
+            setInterval(function() {
+                var now = new Date();
+                var hours = now.getHours().toString().padStart(2, '0');
+                var minutes = now.getMinutes().toString().padStart(2, '0');
+                var seconds = now.getSeconds().toString().padStart(2, '0');
+                clock.textContent = hours + ':' + minutes + ':' + seconds;
+            }, 1000);
+        }
+
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var message = document.getElementById("message").value;
+
+            if (name.trim() == "" || message.trim() == "") {
+                alert("Please fill in all fields");
+                return false;
+            }
+
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent = "Please enter a valid email address";
+                return false;
+            } else {
+                document.getElementById("emailError").textContent = "";
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
